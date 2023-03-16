@@ -1,0 +1,445 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "AndrianDev",
+      "version": "1.0.0",
+      "description": "AndrianDev APi Docs"
+    },
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    },
+    "paths": {
+      "/api/login": {
+        "post": {
+          "tags": [
+            "Auth"
+          ],
+          "summary": "Sign in",
+          "description": "Login by username and password result jwt token",
+          "operationId": "authLogin",
+          "requestBody": {
+            "description": "Pass user credentials",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "string",
+                    "password"
+                  ],
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "format": "string",
+                      "example": "yourname"
+                    },
+                    "password": {
+                      "type": "string",
+                      "format": "password",
+                      "example": "PassWord12345"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success login",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "status": {
+                        "type": "integer",
+                        "example": "200"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Success"
+                      },
+                      "data": {
+                        "type": "string",
+                        "example": "Token"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/candidat": {
+        "get": {
+          "tags": [
+            "Candidat"
+          ],
+          "summary": "getAllData",
+          "description": "Get All Data Candidat",
+          "operationId": "getAllData",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "status": {
+                        "type": "integer",
+                        "example": "200"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Success"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "example": "..."
+                        }
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ]
+        }
+      },
+      "/api/candidat/{id}": {
+        "get": {
+          "tags": [
+            "Candidat"
+          ],
+          "summary": "showDetail",
+          "description": "Show Detail Data",
+          "operationId": "showDetail",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Parameter id candidat",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "examples": {
+                "int": {
+                  "summary": "An int value.",
+                  "value": "1"
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "status": {
+                        "type": "integer",
+                        "example": "200"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Success"
+                      },
+                      "data": {
+                        "type": "object",
+                        "example": "..."
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ]
+        },
+        "post": {
+          "tags": [
+            "Candidat"
+          ],
+          "summary": "editCandidat",
+          "description": "Edit data candidat",
+          "operationId": "editCandidat",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Parameter id candidat",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "examples": {
+                "int": {
+                  "summary": "An int value.",
+                  "value": "1"
+                }
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "education": {
+                      "type": "string"
+                    },
+                    "birthday": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "experience": {
+                      "type": "integer"
+                    },
+                    "last_position": {
+                      "type": "string"
+                    },
+                    "applied_position": {
+                      "type": "string"
+                    },
+                    "skills": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "integer"
+                    },
+                    "resume": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "example": {
+                    "name": "Jessica Smith",
+                    "education": "SMK Bandung",
+                    "birthday": "2000-04-12",
+                    "experience": 5,
+                    "last_position": "CEO",
+                    "applied_position": "Senior Developer",
+                    "skills": "PHP,Java,Mysql,Javascript",
+                    "email": "andrian@gmail.com",
+                    "phone": 8123456789,
+                    "resume": "file.pdf"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "status": {
+                        "type": "integer",
+                        "example": "200"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Success updated candidat"
+                      },
+                      "data": {
+                        "type": "string",
+                        "example": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ]
+        },
+        "delete": {
+          "tags": [
+            "Candidat"
+          ],
+          "summary": "deleteCandidat",
+          "description": "Delete Data Candidat",
+          "operationId": "deleteCandidat",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Parameter id candidat",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "examples": {
+                "int": {
+                  "summary": "An int value.",
+                  "value": "1"
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "status": {
+                        "type": "integer",
+                        "example": "200"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Success deleted candidat"
+                      },
+                      "data": {
+                        "type": "string",
+                        "example": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ]
+        }
+      },
+      "/api/candidat/create": {
+        "post": {
+          "tags": [
+            "Candidat"
+          ],
+          "summary": "createCandidat",
+          "description": "Create new candidat",
+          "operationId": "createCandidat",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "education": {
+                      "type": "string"
+                    },
+                    "birthday": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "experience": {
+                      "type": "integer"
+                    },
+                    "last_position": {
+                      "type": "string"
+                    },
+                    "applied_position": {
+                      "type": "string"
+                    },
+                    "skills": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "integer"
+                    },
+                    "resume": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "example": {
+                    "name": "Jessica Smith",
+                    "education": "SMK Bandung",
+                    "birthday": "2000-04-12",
+                    "experience": 5,
+                    "last_position": "CEO",
+                    "applied_position": "Senior Developer",
+                    "skills": "PHP,Java,Mysql,Javascript",
+                    "email": "andrian@gmail.com",
+                    "phone": 8123456789,
+                    "resume": "file.pdf"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "status": {
+                        "type": "integer",
+                        "example": "200"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Success created candidat"
+                      },
+                      "data": {
+                        "type": "object",
+                        "example": "..."
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ]
+        }
+      }
+    }
+  }
