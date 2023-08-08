@@ -41,4 +41,4 @@ RUN chmod 777 -R .
 
 RUN a2enmod rewrite
 
-COPY .env.local /var/www/html/.env
+COPY .env /var/www/html/.env
